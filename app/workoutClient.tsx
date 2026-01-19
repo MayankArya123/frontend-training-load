@@ -19,11 +19,9 @@ type Workout = {
 };
 
 export default function WorkoutClient({
-  token,
   insights,
   workouts,
 }: {
-  token: string;
   insights: any;
   workouts: Workout[];
 }) {
@@ -64,7 +62,6 @@ export default function WorkoutClient({
           </div>
 
           <WorkoutForm
-            token={token}
             open={showForm}
             onClose={() => setShowForm(false)}
           />
@@ -92,13 +89,11 @@ export default function WorkoutClient({
           />
 
           <EditWorkoutModal
-            token={token}
             workout={editWorkout}
             onClose={() => setEditWorkout(null)}
           />
 
           <DeleteWorkoutModal
-            token={token}
             workout={deleteWorkout}
             onClose={() => setDeleteWorkout(null)}
           />

@@ -4,11 +4,9 @@ import { useState } from "react";
 import { createWorkout } from "../../lib/api"
 
 export default function WorkoutForm({
-  token,
   open,
   onClose,
 }: {
-  token:string,
   open: boolean;
   onClose: () => void;
 }) {
@@ -79,7 +77,7 @@ export default function WorkoutForm({
     e.preventDefault();
     if (!validate()) return;
 
-    await createWorkout(token,form);
+    await createWorkout(form);
     onClose();
     window.location.reload();
   };

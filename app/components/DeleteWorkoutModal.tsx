@@ -3,11 +3,9 @@ import { deleteWorkout } from "../../lib/api";
 import { useState, useEffect } from "react";
 
 export default function EditWorkoutModal({
-  token,
   workout,
   onClose,
 }: {
-  token:string,
   workout: any;
   onClose: () => void;
 }) {
@@ -20,7 +18,7 @@ export default function EditWorkoutModal({
   if (!form) return null;
 
   async function handleDelete() {
-    await deleteWorkout(token,workout?._id);
+    await deleteWorkout(workout?._id);
     onClose();
     window.location.reload();
   }

@@ -13,11 +13,9 @@ type Workout = {
 };
 
 export default function EditWorkoutModal({
-  token,
   workout,
   onClose,
 }: {
-  token:string,
   workout: Workout | null;
   onClose: () => void;
 }) {
@@ -34,7 +32,7 @@ export default function EditWorkoutModal({
 
     const load = form.duration * form.intensity;
 
-      await updateWorkout(token,form._id, {
+      await updateWorkout(form._id, {
         ...form,
         load,
       });

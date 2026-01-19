@@ -4,42 +4,36 @@ const jsonHeaders = {
   "Content-Type": "application/json",
 };
 
-export async function getWorkouts(token: string) {
-  const res = await fetch(`${API_URL}/api/workouts`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+export async function getMe() {
+  const res = await fetch(`${API_URL}/api/users/me`, {
+    credentials: "include", // 🔥 cookie sent automatically
     cache: "no-store",
   });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch workouts");
-  }
-
+  if (!res.ok) return null;
   return res.json();
 }
 
-export async function getInsights(token: string) {
+export async function getInsights() {
   const res = await fetch(`${API_URL}/api/workouts/insights/weekly`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
+    credentials: "include",
   });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch insights");
-  }
-
   return res.json();
 }
-export async function createWorkout(token: string, data: any) {
+
+export async function getWorkouts() {
+  const res = await fetch(`${API_URL}/api/workouts`, {
+    credentials: "include",
+  });
+  return res.json();
+}
+export async function createWorkout(data: any) {
   const res = await fetch(`${API_URL}/api/workouts`, {
     method: "POST",
     headers: {
       ...jsonHeaders,
-      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -50,17 +44,13 @@ export async function createWorkout(token: string, data: any) {
   return res.json();
 }
 
-export async function updateWorkout(
-  token: string,
-  id: string,
-  data: any
-) {
+export async function updateWorkout(id: string, data: any) {
   const res = await fetch(`${API_URL}/api/workouts/${id}`, {
     method: "PUT",
     headers: {
       ...jsonHeaders,
-      Authorization: `Bearer ${token}`,
     },
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -71,12 +61,13 @@ export async function updateWorkout(
   return res.json();
 }
 
-export async function deleteWorkout(token: string, id: string) {
+export async function deleteWorkout( id: string) {
   const res = await fetch(`${API_URL}/api/workouts/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${token}`,
+      ...jsonHeaders,
     },
+    credentials: "include",
   });
 
   if (!res.ok) {

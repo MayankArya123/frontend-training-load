@@ -1,20 +1,21 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { getInsights, getWorkouts } from "../lib/api";
+import { getInsights, getWorkouts,getMe } from "../lib/api";
 import WorkoutClient from "./workoutClient";
 
 export default async function Home() {
   // ✅ await the cookies() call
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  console.log('token check',token)
 
-  if (!token) {
+    // ✅ Ask backend if user is logged in
+  const user = await getMe();
+  console.log('check logged in user',user)
+
+  if (!user) {
     redirect("/register");
   }
 
-  const insights = await getInsights(token);
-  const workouts = await getWorkouts(token);
+  const insights = await getInsights();
+  const workouts = await getWorkouts();
 
-  return <WorkoutClient token={token} insights={insights} workouts={workouts} />;
+  return <WorkoutClient insights={insights} workouts={workouts} />;
 }
