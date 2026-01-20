@@ -20,7 +20,7 @@ export default function RegisterPage() {
 
     try {
       const res = await registerUser(form);
-      console.log('res from register',res)
+
       router.push("/");
     } catch (err: any) {
       setError(err.message);

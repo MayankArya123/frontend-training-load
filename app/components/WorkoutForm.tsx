@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createWorkout } from "../../lib/api"
+import { createWorkout } from "../../lib/api";
 
 export default function WorkoutForm({
   open,
@@ -96,11 +96,11 @@ export default function WorkoutForm({
           <input
             className="w-full border rounded p-2"
             value={form.title}
-            onChange={(e) =>
-              setForm({ ...form, title: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
           />
-          {errors.title && <p className="text-red-500 text-xs">{errors.title}</p>}
+          {errors.title && (
+            <p className="text-red-500 text-xs">{errors.title}</p>
+          )}
         </div>
 
         {/* Duration & Intensity */}
@@ -111,12 +111,12 @@ export default function WorkoutForm({
               type="number"
               className="w-full border rounded p-2"
               value={form.duration}
-              onChange={(e) =>
-                setForm({ ...form, duration: +e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, duration: +e.target.value })}
               min={1}
             />
-            {errors.duration && <p className="text-red-500 text-xs">{errors.duration}</p>}
+            {errors.duration && (
+              <p className="text-red-500 text-xs">{errors.duration}</p>
+            )}
           </div>
 
           <div className="space-y-1">
@@ -127,11 +127,11 @@ export default function WorkoutForm({
               value={form.intensity}
               min={1}
               max={10}
-              onChange={(e) =>
-                setForm({ ...form, intensity: +e.target.value })
-              }
+              onChange={(e) => setForm({ ...form, intensity: +e.target.value })}
             />
-            {errors.intensity && <p className="text-red-500 text-xs">{errors.intensity}</p>}
+            {errors.intensity && (
+              <p className="text-red-500 text-xs">{errors.intensity}</p>
+            )}
           </div>
         </div>
 
@@ -141,9 +141,7 @@ export default function WorkoutForm({
           <select
             className="w-full border rounded p-2"
             value={form.muscleGroup}
-            onChange={(e) =>
-              setForm({ ...form, muscleGroup: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, muscleGroup: e.target.value })}
           >
             <option value="">Select Muscle Group</option>
             {muscleGroups.map((mg) => (
@@ -164,9 +162,7 @@ export default function WorkoutForm({
             type="date"
             className="w-full border rounded p-2"
             value={form.date}
-            onChange={(e) =>
-              setForm({ ...form, date: e.target.value })
-            }
+            onChange={(e) => setForm({ ...form, date: e.target.value })}
           />
           {errors.date && <p className="text-red-500 text-xs">{errors.date}</p>}
         </div>

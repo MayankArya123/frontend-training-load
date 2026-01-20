@@ -36,7 +36,6 @@ export default function WorkoutClient({
   const handleLogout = async () => {
     try {
       const res = await logoutUser();
-      console.log("res from logout", res);
       router.push("/login");
     } catch (err: any) {}
   };
@@ -61,10 +60,7 @@ export default function WorkoutClient({
             <p>Plateau Detected: {insights?.plateau ? "YES" : "NO"}</p>
           </div>
 
-          <WorkoutForm
-            open={showForm}
-            onClose={() => setShowForm(false)}
-          />
+          <WorkoutForm open={showForm} onClose={() => setShowForm(false)} />
           {/* Add Button */}
           <div className="flex justify-end">
             <button
@@ -79,11 +75,9 @@ export default function WorkoutClient({
           <WorkoutList
             workouts={workouts}
             onEdit={(w) => {
-              console.log("EDIT CLICKED", w); // 🔥 DEBUG
               setEditWorkout(w);
             }}
             onDelete={(w) => {
-              console.log("delete clicked", w); // 🔥 DEBUG
               setDeleteWorkout(w);
             }}
           />

@@ -56,7 +56,9 @@ export default function LoginPage() {
 
         <p className="text-sm text-center">
           No account?{" "}
-          <a href="/register" className="text-blue-600">Register</a>
+          <a href="/register" className="text-blue-600">
+            Register
+          </a>
         </p>
       </form>
     </div>

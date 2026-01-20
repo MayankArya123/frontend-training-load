@@ -32,10 +32,10 @@ export default function EditWorkoutModal({
 
     const load = form.duration * form.intensity;
 
-      await updateWorkout(form._id, {
-        ...form,
-        load,
-      });
+    await updateWorkout(form._id, {
+      ...form,
+      load,
+    });
 
     onClose();
     window.location.reload();
@@ -77,9 +77,7 @@ export default function EditWorkoutModal({
 
         <input
           value={form.muscleGroup}
-          onChange={(e) =>
-            setForm({ ...form, muscleGroup: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, muscleGroup: e.target.value })}
           className="border p-2 w-full"
         />
 
