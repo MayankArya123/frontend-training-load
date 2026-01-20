@@ -5,10 +5,14 @@ const jsonHeaders = {
 };
 
 export async function getMe() {
+  console.log("get me route fn call");
+
   const res = await fetch(`${API_URL}/api/users/me`, {
     credentials: "include", // 🔥 cookie sent automatically
     cache: "no-store",
   });
+
+  console.log('check res',res)
 
   if (!res.ok) return null;
   return res.json();
@@ -61,7 +65,7 @@ export async function updateWorkout(id: string, data: any) {
   return res.json();
 }
 
-export async function deleteWorkout( id: string) {
+export async function deleteWorkout(id: string) {
   const res = await fetch(`${API_URL}/api/workouts/${id}`, {
     method: "DELETE",
     headers: {

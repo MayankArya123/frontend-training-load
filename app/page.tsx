@@ -1,21 +1,30 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { getInsights, getWorkouts,getMe } from "../lib/api";
+"use client";
+
+import { useEffect, useState } from "react";
+import { getInsights, getWorkouts, getMe } from "../lib/api";
 import WorkoutClient from "./workoutClient";
+import { useRouter } from "next/navigation";
 
-export default async function Home() {
-  // ✅ await the cookies() call
+export default function Home() {
+  const router = useRouter();
+  const [insights, setInsights] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    // ✅ Ask backend if user is logged in
-  const user = await getMe();
-  console.log('check logged in user',user)
+  useEffect(() => {
+    const loadData = async () => {
+      const user = await getMe();
+      if (!user) return router.push("/register");
 
-  if (!user) {
-    redirect("/register");
-  }
+      const [i, w] = await Promise.all([getInsights(), getWorkouts()]);
+      setInsights(i);
+      setWorkouts(w);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
 
-  const insights = await getInsights();
-  const workouts = await getWorkouts();
+  if (loading) return <p>Loading...</p>;
 
   return <WorkoutClient insights={insights} workouts={workouts} />;
 }
